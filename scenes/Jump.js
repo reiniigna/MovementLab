@@ -9,7 +9,7 @@ class Jump extends Phaser.Scene {
         this.MAX_X_VEL = 500;   // pixels/second
         this.MAX_Y_VEL = 5000;
         this.DRAG = 600;    // DRAG < ACCELERATION = icy slide
-        this.physics.world.gravity.y = 3000;
+        this.physics.world.gravity.y = 10000;
 
         // set bg color
         this.cameras.main.setBackgroundColor('#227B96');
@@ -102,11 +102,12 @@ class Jump extends Phaser.Scene {
         // jump
         if(!this.alien.body.touching.down) {
             this.alien.anims.play('jump', true);
+            
         }
         // use JustDown to avoid 'pogo' jumps if you player keeps the up key held down
         // note: there is unfortunately no .justDown property in Phaser's cursor object
         if(this.alien.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
-            // set jump velocity here
+            this.alien.setVelocityY(-2000);
 
 
             this.upKey.tint = 0xFACADE;
